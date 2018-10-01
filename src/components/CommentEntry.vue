@@ -1,7 +1,7 @@
 <template>
   <div class="comment-entry">
     <Avatar :imgSrc="userData.avatar" size="small" class="comment-entry-avatar" />
-    <input @keyup.enter="submitComment" v-model="comment.comment.message" class="comment-entry-input" placeholder="Enter a comment..." />
+    <input @keyup.enter="submitComment" v-model="comment.message" class="comment-entry-input" placeholder="Enter a comment..." />
     <Button @click.native="submitComment" class="comment-entry-submit" text="POST" :block="true" size="small" />
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   props: {
     postId: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
@@ -36,12 +36,11 @@ export default {
   },
   methods: {
     validComment() {
-      return this.comment.comment.message && this.comment.comment.message.length > 0;
+      return this.comment.message && this.comment.message.length > 0;
     },
     submitComment(ev) {
       if (this.validComment()) {
-        this.comment.comment.id = Math.floor(Math.random() * 10) + 2394600;
-        this.comment.comment.date = new Date().getTime();
+        this.comment.date = new Date().getTime();
 
         const newComment = JSON.parse(JSON.stringify(this.comment));
 
@@ -57,8 +56,8 @@ export default {
     }
   },
   mounted() {
-    this.comment.postId = this.postId;
-    this.comment.comment.user = this.userData;
+    this.comment.post = this.postId;
+    this.comment.user = this.userData['.key'];
   },
   components: {
     Avatar,

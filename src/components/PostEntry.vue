@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
 import Avatar from '@/components/ui/Avatar.vue';
 import Button from '@/components/ui/Button.vue';
@@ -38,7 +38,6 @@ export default {
   methods: {
     submitPost(ev) {
       if (this.validPost) {
-        this.post.id = Math.floor(Math.random() * 10) + 2394700;
         this.post.date = new Date().getTime();
 
         const newPost = JSON.parse(JSON.stringify(this.post));
@@ -56,7 +55,7 @@ export default {
     }
   },
   mounted() {
-    this.post.user = this.userData;
+    this.post.user = this.userData['.key'];
   },
   components: {
     Avatar,

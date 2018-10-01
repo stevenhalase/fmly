@@ -20,8 +20,8 @@
       <ResponsiveImage v-if="item.image" :imgSrc="item.image" width="100%" height="300px" innerShadow />
     </div>
     <Modal @close-modal="toggleComments(false)" :open="showComments">
-      <CommentEntry :postId="item.id" />
-      <FeedItemComments :postId="item.id" :comments="item.comments" />
+      <CommentEntry :postId="item['.key']" />
+      <FeedItemComments :postId="item['.key']" :comments="item.comments" />
     </Modal>
   </div>
 </template>

@@ -35,7 +35,7 @@ export default {
   name: 'feed-item-comments',
   props: {
     postId: {
-      type: Number,
+      type: String,
       required: true,
     },
     comments: {
@@ -65,7 +65,7 @@ export default {
       this.$store.dispatch('likeComment', payload);
     },
     commentLikedByUser(comment) {
-      return comment.likes.find(like => like.user.id === this.userData.id) !== undefined;
+      return comment.likes.find(like => like.user['.key'] === this.userData['.key']) !== undefined;
     },
   },
   components: {
