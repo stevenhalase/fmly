@@ -26,6 +26,21 @@ export default {
   methods: {
     closeModal() {
       this.$emit('close-modal');
+    },
+    toggleNoScroll(apply) {
+      const body = document.querySelector('body');
+      if (apply) {
+        body.classList.add('noscroll');
+      } else {
+        body.classList.remove('noscroll');
+      }
+    },
+  },
+  updated() {
+    if (this.open) {
+      this.toggleNoScroll(true);
+    } else {
+      this.toggleNoScroll(false);
     }
   }
 };

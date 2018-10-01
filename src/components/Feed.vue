@@ -18,9 +18,7 @@ export default {
   computed: {
     ...mapState({
       userData: state => state.userData,
-      feed: state => state.feed.sort((a, b) => {
-        return b.date - a.date;
-      }),
+      feed: state => state.feed.sort((a, b) => b.date - a.date),
     }),
   },
   methods: {

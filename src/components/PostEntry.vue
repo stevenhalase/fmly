@@ -21,7 +21,10 @@ export default {
   name: 'post-entry',
   data() {
     return {
-      post: {},
+      post: {
+        comments: [],
+        likes: [],
+      },
     };
   },
   computed: {
@@ -35,6 +38,7 @@ export default {
   methods: {
     submitPost(ev) {
       if (this.validPost) {
+        this.post.id = Math.floor(Math.random() * 10) + 2394700;
         this.post.date = new Date().getTime();
 
         const newPost = JSON.parse(JSON.stringify(this.post));
