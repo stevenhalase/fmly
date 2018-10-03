@@ -5,7 +5,7 @@ const axios = require('axios');
 
 Vue.use(Vuex);
 
-const apiBase = process.env.API_BASE;
+const apiBase = process.env.VUE_APP_API_BASE;
 const routes = {
   USER: {
     LOGIN: 'users/login',
