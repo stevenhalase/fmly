@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userData: state => state.userData
+      userData: state => state.userData,
     }),
     sortedComments() {
       return this.comments.sort((a, b) => b.date - a.date);
@@ -54,18 +54,15 @@ export default {
   methods: {
     likeComment(comment) {
       const payload = {
-        postId: this.postId,
-        commentId: comment.id,
-        like: {
-          date: new Date().getTime(),
-          user: this.userData,
-        }
+        date: new Date().getTime(),
+        user: this.userData._id,
+        comment: comment._id,
       };
 
-      this.$store.dispatch('likeComment', payload);
+      this.$store.dispatch('addLike', payload);
     },
     commentLikedByUser(comment) {
-      return comment.likes.find(like => like.user['.key'] === this.userData['.key']) !== undefined;
+      return comment.likes.find(like => like.user === this.userData._id) !== undefined;
     },
   },
   components: {

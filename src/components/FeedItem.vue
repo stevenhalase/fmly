@@ -2,26 +2,25 @@
   <div class="feed-item">
     <div class="feed-item-side">
       <Avatar :imgSrc="item.user.avatar" size="small" class="feed-item-avatar" />
-      <div class="feed-item-actions">
-        <Fab @click.native="toggleComments(true)" class="feed-item-action" icon="regular/comment" />
-        <Fab @click.native="likePost" class="feed-item-action" :icon="postLikedByUser ? 'heart' : 'regular/heart'" :disabled="postLikedByUser" />
-      </div>
     </div>
     <div class="feed-item-content">
       <div class="feed-item-content-container">
         <div class="feed-item-content-container-title">
-          <h3>{{ item.title }}</h3>
+          <p>{{ item.message }}</p>
           <Badge>
             <timeago :datetime="item.date"></timeago>
           </Badge>
         </div>
-        <p>{{ item.message }}</p>
       </div>
       <ResponsiveImage v-if="item.image" :imgSrc="item.image" width="100%" height="300px" innerShadow />
     </div>
+    <div class="feed-item-actions">
+      <Fab @click.native="toggleComments(true)" class="feed-item-action" icon="regular/comment" />
+      <Fab @click.native="addLike" class="feed-item-action" :icon="postLikedByUser ? 'heart' : 'regular/heart'" :disabled="postLikedByUser" />
+    </div>
     <Modal @close-modal="toggleComments(false)" :open="showComments">
-      <CommentEntry :postId="item['.key']" />
-      <FeedItemComments :postId="item['.key']" :comments="item.comments" />
+      <CommentEntry :postId="item._id" />
+      <FeedItemComments :postId="item._id" :comments="item.comments" />
     </Modal>
   </div>
 </template>
@@ -56,20 +55,18 @@ export default {
   },
   computed: {
     ...mapState({
-      userData: state => state.userData
+      userData: state => state.userData,
     }),
   },
   methods: {
-    likePost() {
+    addLike() {
       const payload = {
-        postId: this.item.id,
-        like: {
-          date: new Date().getTime(),
-          user: this.userData
-        }
+        post: this.item._id,
+        date: new Date().getTime(),
+        user: this.userData,
       };
 
-      this.$store.dispatch('likePost', payload);
+      this.$store.dispatch('addLike', payload);
     },
     toggleComments(open) {
       this.showComments = open;
@@ -92,6 +89,7 @@ export default {
 
 .feed-item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
@@ -102,17 +100,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
+    padding-right: 15px;
 
     .feed-item-avatar {
       margin-bottom: 10px;
-    }
-
-    .feed-item-actions {
-
-      .feed-item-action {
-        margin-bottom: 10px;
-      }
     }
   }
 
@@ -136,6 +128,18 @@ export default {
         justify-content: space-between;
         align-items: flex-start;
       }
+    }
+  }
+
+  .feed-item-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .feed-item-action {
+      margin-top: 10px;
+      margin-left: 10px;
     }
   }
 }

@@ -17,8 +17,8 @@ export default {
       let classes = 'badge';
       classes += this.size ? ` ${this.size}` : '';
       return classes;
-    }
-  }
+    },
+  },
 };
 </script>
 

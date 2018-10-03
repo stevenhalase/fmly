@@ -4,7 +4,6 @@
       <Avatar :imgSrc="userData.avatar" size="small" />
     </div>
     <div class="post-entry-content">
-      <input v-model="post.title" class="post-entry-title" placeholder="Enter a title..." />
       <textarea v-model="post.message" class="post-entry-message" placeholder="Enter a message..."></textarea>
       <Button @click.native="submitPost" text="POST" :block="true" />
     </div>
@@ -21,10 +20,7 @@ export default {
   name: 'post-entry',
   data() {
     return {
-      post: {
-        comments: [],
-        likes: [],
-      },
+      post: {},
     };
   },
   computed: {
@@ -32,7 +28,7 @@ export default {
       userData: state => state.userData,
     }),
     validPost() {
-      return (this.post.title && this.post.title.length > 0) && (this.post.message && this.post.message.length > 0);
+      return this.post.message && this.post.message.length > 0;
     },
   },
   methods: {
@@ -43,23 +39,22 @@ export default {
         const newPost = JSON.parse(JSON.stringify(this.post));
 
         this.$store.dispatch('addPost', newPost)
-          .then(response => {
+          .then((response) => {
             this.resetPost();
           });
       }
     },
     resetPost() {
       this.post.date = null;
-      this.post.title = '';
       this.post.message = '';
-    }
+    },
   },
   mounted() {
-    this.post.user = this.userData['.key'];
+    this.post.user = this.userData._id;
   },
   components: {
     Avatar,
-    Button
+    Button,
   },
 };
 </script>
@@ -77,8 +72,9 @@ export default {
   .post-entry-user {
     width: 10%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 15px;
   }
 
   .post-entry-content {

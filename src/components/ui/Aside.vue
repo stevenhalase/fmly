@@ -1,7 +1,10 @@
 <template>
   <div :class="classes">
-    <div @click="closeModal" class="modal-backdrop"></div>
-    <div class="modal-container">
+    <div @click="closeModal" class="aside-backdrop"></div>
+    <div class="aside-container">
+      <div class="aside-close">
+        <v-icon name="close"/>
+      </div>
       <slot></slot>
     </div>
   </div>
@@ -9,7 +12,7 @@
 
 <script>
 export default {
-  name: 'modal',
+  name: 'aside',
   props: {
     open: {
       type: Boolean,
@@ -18,14 +21,14 @@ export default {
   },
   computed: {
     classes() {
-      let classes = 'modal';
+      let classes = 'aside';
       classes += this.open ? ' open' : '';
       return classes;
     },
   },
   methods: {
-    closeModal() {
-      this.$emit('close-modal');
+    closeAside() {
+      this.$emit('close-aside');
     },
     toggleNoScroll(apply) {
       const body = document.querySelector('body');
@@ -49,21 +52,33 @@ export default {
 <style lang="scss" scoped>
 @import '../../styles/global';
 
-.modal {
+.aside {
   position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  &.open {
-    display: flex;
+  .aside-container {
+    width: 75vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 101;
+    background-color: #333;
+    padding: 15px;
+    transform: translateX(calc(100% - 25px));
+
+    .aside-close {
+      color: $chromeWhite;
+      width: 100%;
+    }
   }
 
-  .modal-backdrop {
+  .aside-backdrop {
+    display: none;
     position: fixed;
     left: 0;
     top: 0;
@@ -73,15 +88,16 @@ export default {
     background-color: rgba(0,0,0,0.6);
   }
 
-  .modal-container {
-    width: 80%;
-    max-width: 1000px;
-    min-height: 300px;
-    border-radius: 4px;
-    overflow: hidden;
-    z-index: 101;
-    background-color: $chromeWhite;
-    padding: 15px;
+  &.open {
+
+    .aside-backdrop {
+      display: flex;
+    }
+
+    .aside-container {
+      transform: translateX(0);
+      transition: all .25s ease-in-out;
+    }
   }
 }
 </style>

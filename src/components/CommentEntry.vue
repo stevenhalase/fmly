@@ -16,11 +16,7 @@ export default {
   name: 'comment-entry',
   data() {
     return {
-      comment: { 
-        comment: {
-          likes: []
-        } 
-      }
+      comment: {},
     };
   },
   props: {
@@ -31,7 +27,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userData: state => state.userData
+      userData: state => state.userData,
     }),
   },
   methods: {
@@ -45,19 +41,19 @@ export default {
         const newComment = JSON.parse(JSON.stringify(this.comment));
 
         this.$store.dispatch('addComment', newComment)
-          .then(response => {
+          .then((response) => {
             this.resetComment();
           });
       }
     },
     resetComment() {
-      this.comment.comment.date = null;
-      this.comment.comment.message = '';
-    }
+      this.comment.date = null;
+      this.comment.message = '';
+    },
   },
   mounted() {
     this.comment.post = this.postId;
-    this.comment.user = this.userData['.key'];
+    this.comment.user = this.userData._id;
   },
   components: {
     Avatar,

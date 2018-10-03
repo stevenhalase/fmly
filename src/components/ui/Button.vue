@@ -23,8 +23,8 @@ export default {
       classes += this.block ? ' block' : '';
       classes += this.size ? ` ${this.size}` : '';
       return classes;
-    }
-  }
+    },
+  },
 };
 </script>
 

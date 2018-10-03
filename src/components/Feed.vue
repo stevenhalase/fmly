@@ -1,10 +1,10 @@
 <template>
   <div class="feed">
     <FeedItem
-      v-for="(item, index) in populatedFeed"
+      v-for="(post, index) in sortedPosts"
       :key="index"
-      :item="item"
-      :postLikedByUser="postLikedByUser(item)" />
+      :item="post"
+      :postLikedByUser="postLikedByUser(post)" />
   </div>
 </template>
 
@@ -17,19 +17,24 @@ export default {
   name: 'feed',
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       userData: state => state.userData,
-      populatedFeed: state => state.populatedFeed,
+      posts: state => state.posts,
     }),
+    sortedPosts() {
+      return this.posts.sort((a, b) => b.date - a.date);
+    },
   },
   methods: {
     postLikedByUser(post) {
-      return post.likes ? post.likes.find(like => like.user.id === this.userData.id) !== undefined : false;
+      return post.likes ? post.likes.find(like => like.user === this.userData._id) !== undefined : false;
     },
+  },
+  beforeMount() {
+    this.$store.dispatch('getPosts');
   },
   components: {
     FeedItem,
-  }
+  },
 };
 </script>
 

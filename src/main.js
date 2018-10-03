@@ -12,7 +12,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VueTimeago, {
   name: 'timeago', // component name, `timeago` by default
-  locale: 'en-US'
+  locale: 'en-US',
 });
 
 Vue.component('v-icon', Icon);

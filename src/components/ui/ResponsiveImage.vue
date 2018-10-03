@@ -19,12 +19,12 @@ export default {
       type: String,
     },
     innerShadow: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   computed: {
     classes() {
-      let classes = 'responsive-image';
+      const classes = 'responsive-image';
       return classes;
     },
     imgClasses() {
@@ -33,15 +33,15 @@ export default {
       return classes;
     },
     styles() {
-      return { 
+      return {
         width: this.width || '640px',
-        height: this.height || '480px',   
+        height: this.height || '480px',
       };
     },
     bgImg() {
       return { backgroundImage: `url(${this.imgSrc})` };
     },
-  }
+  },
 };
 </script>
 

@@ -17,7 +17,7 @@ export default {
     },
     size: {
       type: String,
-    }
+    },
   },
   computed: {
     classes() {
@@ -25,8 +25,8 @@ export default {
       classes += this.disabled ? ' disabled' : '';
       classes += this.size ? ` ${this.size}` : '';
       return classes;
-    }
-  }
+    },
+  },
 };
 </script>
 

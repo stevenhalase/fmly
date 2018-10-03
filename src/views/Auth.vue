@@ -24,6 +24,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
+  max-width: 1000px;
   min-height: 100vh;
   padding: 15px;
 }
