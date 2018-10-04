@@ -115,6 +115,7 @@ export default {
         padding: 10px;
         border-radius: 4px;
         border: 1px solid rgba(0,0,0,0.1);
+        word-break: break-word;
       }
 
       .feed-item-comment-actions {

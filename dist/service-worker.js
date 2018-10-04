@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a5e83945ad3eec533945c536eccda817.js"
+  "/precache-manifest.a24c886a6aed34bab1a220859d8ec455.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "fmly"});

@@ -15,6 +15,23 @@
     }
   }
 
+  .feed-item-comments {
+    max-height: 70vh!important;
+
+    .feed-item-comment {
+
+      .feed-item-comment-side {
+        width: 20%!important;
+        transition: all 0.25s ease-in-out;
+      }
+    
+      .feed-item-comment-content {
+        width: 75%!important;
+        transition: all 0.25s ease-in-out;
+      }
+    }
+  }
+
   .post-entry {
     .post-entry-user {
       width: 20%!important;
