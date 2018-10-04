@@ -68,6 +68,10 @@ export default {
   align-items: flex-start;
   width: 100%;
   margin-bottom: 15px;
+  background-color: $chromeWhite;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px;
 
   .post-entry-user {
     width: 10%;

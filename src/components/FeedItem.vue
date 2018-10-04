@@ -1,8 +1,5 @@
 <template>
-  <div class="feed-item">
-    <div class="feed-item-side">
-      <Avatar :imgSrc="item.user.avatar" size="small" class="feed-item-avatar" />
-    </div>
+  <div class="feed-item" :class="!isMyPost ? 'my' : ''">
     <div class="feed-item-content">
       <div class="feed-item-content-container">
         <div class="feed-item-content-container-title">
@@ -17,6 +14,7 @@
     <div class="feed-item-actions">
       <Fab @click.native="toggleComments(true)" class="feed-item-action" icon="regular/comment" />
       <Fab @click.native="addLike" class="feed-item-action" :icon="postLikedByUser ? 'heart' : 'regular/heart'" :disabled="postLikedByUser" />
+      <Avatar :imgSrc="item.user.avatar" size="small" class="feed-item-avatar" />
     </div>
     <Modal @close-modal="toggleComments(false)" :open="showComments">
       <CommentEntry :postId="item._id" />
@@ -57,6 +55,9 @@ export default {
     ...mapState({
       userData: state => state.userData,
     }),
+    isMyPost() {
+      return this.item.user._id === this.userData._id;
+    },
   },
   methods: {
     addLike() {
@@ -94,29 +95,27 @@ export default {
   align-items: flex-start;
   width: 100%;
   margin-bottom: 15px;
+  background-color: $chromeWhite;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px;
 
-  .feed-item-side {
-    width: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    padding-right: 15px;
-
-    .feed-item-avatar {
-      margin-bottom: 10px;
+  &.my {
+    .feed-item-content {
+      border-bottom: 3px solid $grey;
     }
   }
 
   .feed-item-content {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: $chromeWhite;
+    background-color: $silver;
     border-radius: 4px;
     overflow: hidden;
+    border-bottom: 3px solid $lightGrey;
 
     .feed-item-content-container {
       width: 100%;
@@ -137,9 +136,8 @@ export default {
     justify-content: flex-end;
     align-items: center;
 
-    .feed-item-action {
-      margin-top: 10px;
-      margin-left: 10px;
+    * {
+      margin: 10px 5px 0;
     }
   }
 }

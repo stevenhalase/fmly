@@ -26,8 +26,8 @@ export default {
 @import '../../styles/global';
 
 .badge {
-  background-color: $silver;
-  color: $chromeWhite;
+  background-color: $chromeWhite;
+  color: $silver;
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 12px;

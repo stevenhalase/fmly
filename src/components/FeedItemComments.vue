@@ -108,7 +108,7 @@ export default {
       }
 
       .feed-item-comment-content {
-        width: 85%;
+        width: 90%;
         display: flex;
         justify-content: flex-start;
         align-items: center;

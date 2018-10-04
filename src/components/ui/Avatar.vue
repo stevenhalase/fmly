@@ -39,7 +39,7 @@ export default {
   overflow: hidden;
   border-radius: 50%;
   border: 5px solid $chromeWhite;
-  box-shadow: 0px 0px 17px -5px rgba(0,0,0,0.75);
+  // box-shadow: 0px 0px 17px -5px rgba(0,0,0,0.75);
 
   &.small {
     height: 50px;
